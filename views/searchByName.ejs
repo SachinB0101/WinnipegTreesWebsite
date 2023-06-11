@@ -1,0 +1,26 @@
+<%- include("partials/header"); -%>
+
+<h4>Select the category then search by a leter or combination of letters which could be present anywhere in the name.</h4>
+
+<style>
+    .myBtn:hover{
+        background-color: #C07F00;
+    }
+</style>
+
+<form action="/simple/searchByName" method="post">
+    <div class="mb-3">
+        <div style="padding-bottom: 5px;">
+            <select name="typeName">
+                <option value="common" selected>Common Name</option>
+                <option value="botanical">Botanical Name</option>
+            </select>
+        </div>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="letter">
+    </div>
+    <button type="submit" class="btn myBtn">Submit</button>
+</form>
+
+<%- include("partials/footer"); -%>
+
+

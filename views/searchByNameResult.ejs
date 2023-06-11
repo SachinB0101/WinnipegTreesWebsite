@@ -1,0 +1,13 @@
+<%- include("partials/header"); -%>
+
+
+<h2>All the trees which has <%= letter %> in their <%= typeName %> name are as follows</h2>
+
+
+<%for(let i = 0; i < result.recordset.length; i++){%>
+    <p><%= result.recordset[i][typeName] %><p>
+<%}%>
+
+
+
+<%- include("partials/footer"); -%>

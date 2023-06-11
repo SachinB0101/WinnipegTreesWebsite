@@ -1,0 +1,37 @@
+<%- include("partials/header"); -%>
+<h1 style="text-align: center; color:#321E1E; padding-bottom: 60px;">Winnipeg Woodlands: Uncover Urban Treescape Secrets</h1>
+
+<h5>The weather is currently "<%=weatherDescription%>"</h5>
+<h5>The temperature in Winnpeg is <%=temp%> degree Celcius<img src=<%=imageUrl%> alt='img'></h5>
+
+
+<p>Welcome to Winnipeg Woodlands, your go-to resource for all trees in Winnipeg. Whether you're a nature 
+  lover, an arborist, or simply curious about the diverse tree species that grace our city, we've got you covered. 
+  Our website offers a user-friendly experience with a range of simple and advanced queries to cater to your 
+  specific interests. Easily access basic information on different tree species. If you're a student learning about 
+  trees and wants to take your tree knowledge to the next level or you're in government department working for the
+  welfare of the city and have good knowledge about city we got you covered with our advance search feature. Join us 
+  at Winnipeg Woodlands and embark on an enriching journey of discovery as we celebrate the magnificence of trees that 
+  thrive in our beloved city.</p>
+
+
+<p>Embark on an exciting journey through the vast expanse of knowledge and information that awaits your curiosity. 
+  You have the freedom to select from a collection of straightforward queries or venture into the realm of advanced 
+  search, where a treasure trove of insights lies ready to be discovered. Indulge your thirst for knowledge and 
+  immerse yourself in the limitless possibilities that await you.</p>
+<div class="dropdown">
+  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">What are you looking for?
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/simple/allTrees">See all different trees in Winnipeg.</a></li>
+    <li><a href="/simple/top5/streets">Top 5 streets of Winnipeg with most trees.</a></li>
+    <!-- <li><a href="/top5/parks">Top 5 parks which have most trees in Winnipeg.</a></li> -->
+    <li><a href="/simple/top5/speices">Top 5 tree species found in Winnipeg</a></li>
+    <!-- <li><a href="/top5/neighMostTree">Top 5 Neighborhoods with most trees</a></li> -->
+    <!-- <li><a href="/top5/elecMostTree">Top 5 Electoral wards with most trees</a></li> -->
+    <!-- <li><a href="#">Top 5 Neighborhoods with least tree('Potential for growing more tree')</a></li> -->
+    <li><a href="/simple/searchByName">Search a tree by it's name</a></li>
+  </ul>
+</div>
+  
+<%- include("partials/footer"); -%>

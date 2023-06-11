@@ -1,0 +1,66 @@
+/* .gradient-background{
+    background: linear-gradient(300deg, #9E6F21, #A2A378, #617A55);
+    /* background-size: 180% 180%; 
+    background-size: cover;
+    animation: gradient-animation 18s ease infinite;
+} */
+
+/* .grad {
+	background: linear-gradient(-45deg, #F97B22, #FEE8B0, #9CA777, #7C9070);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+} */
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+	background-color: #A2A378;	
+	
+	font-size: 15px;
+}
+
+.navbar-nav  li a:hover {
+    color: #735F32 !important;
+}
+
+body{
+    background-color: #FFF8DE;
+}
+
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+    position:fixed;
+	/* position: absolute; */
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #A2A378;
+}
+
+.footer p {
+	margin-top: 25px;
+	font-size: 12px;
+  color: #735F32;
+}

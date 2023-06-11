@@ -1,0 +1,66 @@
+<%- include("partials/header"); -%>
+
+<h4>Enter the common name or botanical name and find where it is located.</h4>
+
+<form action="/advance/locFromCommon" method="post">
+    <div style="padding-bottom: 5px;">
+        <select name="typeName">
+            <option value="common" selected>Common Name</option>
+            <option value="botanical">Botanical Name</option>
+        </select>
+    </div>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="name">
+    <button type="submit" class="btn myBtn">Submit</button>
+</form>
+
+<% if(Object.keys(result).length !== 0){%>
+    <style>
+        #map {
+            float: left;
+            width: 50%;
+            height: 400px; /* Adjust the height as needed */
+        }
+    </style>
+
+    
+    <h3>Map</h3>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            let location = {
+                lat: 49.8954,
+                lng: -97.1385
+            };
+
+            let map = new google.maps.Map(
+                document.getElementById("map"), {
+                    zoom: 11,
+                    center: location
+                }
+            );
+
+            let marker = undefined;
+
+            <% for(let i = 0; i < result.length; i++) { %>
+                marker = new google.maps.Marker({
+                    position: {
+                        lat: <%= result[i].location.latitude %>,
+                        lng: <%= result[i].location.longitude %>
+                    },
+                    optimized: true,
+                    icon: "images/marker.png",
+                    map: map
+                });
+
+                marker.addListener("click", () => {
+                    window.open("http://www.google.com/maps/place/" + <%= result[i].location.latitude %> + "," + <%= result[i].location.longitude %>, "_blank");
+                });
+            <% } %>
+        }
+    </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8RhpUGeVfmJ3ZAgNkE-IPyD15ZBJRvZs&callback=initMap"></script>
+<%}%>
+
+
+<%- include("partials/footer"); -%>

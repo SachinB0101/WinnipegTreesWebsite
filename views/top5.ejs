@@ -1,0 +1,9 @@
+<%- include("partials/header"); -%>
+
+<h1>Hello World</h1>
+
+<%for(let i = 0; i < result.recordset.length; i++){%>
+    <p><%=left + result.recordset[i][leftKey] + " and " + right + result.recordset[i][rightKey]%><p>
+<%}%>
+
+<%- include("partials/footer"); -%>
