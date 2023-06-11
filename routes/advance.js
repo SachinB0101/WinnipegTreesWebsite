@@ -113,7 +113,7 @@ router.post("/locFromName", async (req, res) => {
                 res.render("oops");
             }else{
                 req.session.result = responseData;
-                res.redirect("/advance/locFromCommon");
+                res.redirect("/advance/locFromName");
             }
         });
     });
