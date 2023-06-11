@@ -80,13 +80,24 @@ router.post("/comToBotVisa", (req, res) => {
 
 router.get("/locFromName", (req, res) => {
     let result = {};
-    if(req.session.result){
-        result =  JSON.parse(req.session.result);
-        
-        // for(let i = 0 ; i < result.length; i++){
-        //     console.log(result[i]);
-        // }
-        res.render("location", {result: result});
+    if(Object.keys(req.query).length !== 0){
+        console.log(req.query);
+        https.get(req.query.url, (response) => {
+            let responseData = "";
+          
+            response.on("data", (data) => {
+                responseData += data;
+            });
+    
+            response.on("end", () => {
+                if(responseData.length === 3){
+                    res.render("oops");
+                }else{
+                    result =  JSON.parse(responseData);
+                    res.render("location", {result: result});
+                }
+            });
+        });
     }else{
         res.render("location", {result: result});
     }
@@ -100,23 +111,43 @@ router.post("/locFromName", async (req, res) => {
         url = "https://data.winnipeg.ca/resource/hfwk-jp4h.json?botanical_name=" + req.body.name;
     }
 
-    https.get(url, (response) => {
-        let responseData = "";
-      
-        response.on("data", (data) => {
-            responseData += data;
-        });
+    res.redirect("/advance/locFromName?url=" + encodeURIComponent(url));
+});
 
-        response.on("end", () => {
-            // console.log(responseData);
-            if(responseData.length === 3){
-                res.render("oops");
+router.get("/nearTree", async (req, res) => {
+    let result = "";
+    if(Object.keys(req.query).length !== 0){
+        try {
+            await sql.connect(config);
+            result = await sql.query(`with possibleTree as (\n" +
+            "    SELECT lat, lat/57.29577951 as latInRad, long, long/57.29577951 as longInRad \n" +
+            "    FROM Tree\n" +
+            "    INNER JOIN Location ON Tree.treeId = Location.treeId\n" +
+            "    INNER JOIN CommonName ON Tree.botanical = CommonName.botanical\n" +
+            "    WHERE CommonName.common = ?" +
+            ")\n" +
+            "SELECT TOP 5 lat, long, 3936.0*ACOS((SIN(latInRad)*SIN("+lat2+"))+COS(latInRad)*COS("+lat2+")*COS("+long2+"-longInRad)) as distanceInMiles FROM possibleTree\n" +
+            "ORDER by distanceInMiles DESC`);
+    
+            if(result.recordset.length === 0){
+                res.render("oops")
             }else{
-                req.session.result = responseData;
-                res.redirect("/advance/locFromName");
+                res.render("comToBotVise", {
+                    display : "block",
+                    typeName : req.query.typeName,
+                    result : result
+                });
             }
-        });
-    });
+        } catch (err) {
+            console.log(err);
+        }
+    }else{
+        res.render("nearTree", result);
+    }
+});
+
+router.post("/nearTree", async (req, res) => {
+    
 });
 
 //google maps api key AIzaSyA8RhpUGeVfmJ3ZAgNkE-IPyD15ZBJRvZs
