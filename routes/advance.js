@@ -3,17 +3,11 @@ const router = express.Router();
 const sql = require("mssql");
 const bodyParser = require("body-parser");
 const https = require("https");
-const session = require('express-session');
 const { response } = require("express");
 const { send } = require("process");
 
 router.use(express.static("public"));
 router.use(bodyParser.urlencoded({extended: true}));
-router.use(session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true
-  }));
 
 const config = {
     user: "admin",
