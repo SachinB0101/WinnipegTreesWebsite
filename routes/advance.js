@@ -78,7 +78,7 @@ router.post("/comToBotVisa", (req, res) => {
     res.redirect("/advance/comToBotVise?typeName=" + req.body.typeName + "&name=" + name);
 });
 
-router.get("/locFromCommon", (req, res) => {
+router.get("/locFromName", (req, res) => {
     let result = {};
     if(req.session.result){
         result =  JSON.parse(req.session.result);
@@ -92,7 +92,7 @@ router.get("/locFromCommon", (req, res) => {
     }
 });
 
-router.post("/locFromCommon", async (req, res) => {
+router.post("/locFromName", async (req, res) => {
     let url = "";
     if(req.body.typeName === "common"){
         url = "https://data.winnipeg.ca/resource/hfwk-jp4h.json?common_name=" + req.body.name;
