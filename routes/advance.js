@@ -111,37 +111,14 @@ router.post("/locFromName", async (req, res) => {
 router.get("/nearTree", async (req, res) => {
     let result = "";
     if(Object.keys(req.query).length !== 0){
-        try {
-            await sql.connect(config);
-            result = await sql.query(`with possibleTree as (\n" +
-            "    SELECT lat, lat/57.29577951 as latInRad, long, long/57.29577951 as longInRad \n" +
-            "    FROM Tree\n" +
-            "    INNER JOIN Location ON Tree.treeId = Location.treeId\n" +
-            "    INNER JOIN CommonName ON Tree.botanical = CommonName.botanical\n" +
-            "    WHERE CommonName.common = ?" +
-            ")\n" +
-            "SELECT TOP 5 lat, long, 3936.0*ACOS((SIN(latInRad)*SIN("+lat2+"))+COS(latInRad)*COS("+lat2+")*COS("+long2+"-longInRad)) as distanceInMiles FROM possibleTree\n" +
-            "ORDER by distanceInMiles DESC`);
-    
-            if(result.recordset.length === 0){
-                res.render("oops")
-            }else{
-                res.render("comToBotVise", {
-                    display : "block",
-                    typeName : req.query.typeName,
-                    result : result
-                });
-            }
-        } catch (err) {
-            console.log(err);
-        }
+        
     }else{
         res.render("nearTree", result);
     }
 });
 
-router.post("/nearTree", async (req, res) => {
-    
+router.post("/nearTree", (req, res) => {
+    res.redirect("/advance/nearTree?common=" + req.body.common + "&lat=" + req.body.lat + "&lng=" + req.body.lng);
 });
 
 //google maps api key AIzaSyA8RhpUGeVfmJ3ZAgNkE-IPyD15ZBJRvZs
