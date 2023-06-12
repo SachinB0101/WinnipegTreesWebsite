@@ -3,20 +3,82 @@
 <h4>Enter latitude, longitude and common name and get top 5 tree location near the given position.</h4>
 
 <form action="/advance/nearTree" method="post">
-    <!-- <div style="padding-bottom: 5px;">
+    <div style="padding-bottom: 5px;">
         <select name="typeName">
             <option value="common" selected>Common Name</option>
             <option value="botanical">Botanical Name</option>
         </select>
-    </div> -->
+    </div>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="name">
     <label>Latitude</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="lat">
     <label>Longitude</label>
     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="lng">
-    <label>Common Name</label>
-    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Type Here" name="common">
 
     <button type="submit" class="btn myBtn">Submit</button>
 </form>
+
+<% if(locationArray.length !== 0){%>
+    <style>
+        #map {
+            float: left;
+            width: 50%;
+            height: 400px; /* Adjust the height as needed */
+        }
+    </style>
+
+    
+    <h3>Map</h3>
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            let location = {
+                lat: 49.8954,
+                lng: -97.1385
+            };
+
+            let map = new google.maps.Map(
+                document.getElementById("map"), {
+                    zoom: 11,
+                    center: location
+                }
+            );
+
+            let marker = undefined;
+
+            <% for(let i = 0; i < 5; i++) { %>
+                marker = new google.maps.Marker({
+                    position: {
+                        lat: <%= locationArray[i].lat %>,
+                        lng: <%= locationArray[i].lng %>
+                    },
+                    optimized: true,
+                    icon: "images/marker.png",
+                    map: map
+                });
+
+                marker.addListener("click", () => {
+                    window.open("http://www.google.com/maps/place/" + <%= locationArray[i].lat %> + "," + <%= locationArray[i].lng %>, "_blank");
+                });
+            <% } %>
+
+            marker = new google.maps.Marker({
+                position: {
+                    lat: <%= myLat %>,
+                    lng: <%= myLng %>
+                },
+                optimized: true,
+                map: map
+            });
+
+            marker.addListener("click", () => {
+                window.open("http://www.google.com/maps/place/" + <%= myLat %> + "," + <%= myLng %>, "_blank");
+            });
+        }
+    </script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8RhpUGeVfmJ3ZAgNkE-IPyD15ZBJRvZs&callback=initMap"></script>
+<%}%>
+
 
 <%- include("partials/footer"); -%>
