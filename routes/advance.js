@@ -75,7 +75,6 @@ router.post("/comToBotVisa", (req, res) => {
 router.get("/locFromName", (req, res) => {
     let result = {};
     if(Object.keys(req.query).length !== 0){
-        console.log(req.query);
         https.get(req.query.url, (response) => {
             let responseData = "";
           
@@ -111,7 +110,23 @@ router.post("/locFromName", async (req, res) => {
 router.get("/nearTree", async (req, res) => {
     let result = "";
     if(Object.keys(req.query).length !== 0){
-        
+        console.log("here");
+        // https.get(req.query.url, (response) => {
+        //     let responseData = "";
+          
+        //     response.on("data", (data) => {
+        //         responseData += data;
+        //     });
+    
+        //     response.on("end", () => {
+        //         if(responseData.length === 3){
+        //             res.render("oops");
+        //         }else{
+        //             result =  JSON.parse(responseData);
+        //             res.render("location", {result: result});
+        //         }
+        //     });
+        // });
     }else{
         res.render("nearTree", result);
     }
