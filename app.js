@@ -7,6 +7,8 @@ const https = require("https");
 const simpleRoute = require("./routes/simple");
 const advanceRoute = require("./routes/advance");
 
+const PORT = process.env.PORT | 8000;
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use("/simple", simpleRoute);
@@ -34,6 +36,6 @@ app.get("/", (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log("Server started on 3000...");
+app.listen(PORT, () => {
+    console.log(`Server started on ${PORT}....`);
 });
