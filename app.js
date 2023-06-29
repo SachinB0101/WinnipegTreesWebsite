@@ -7,7 +7,7 @@ const https = require("https");
 const simpleRoute = require("./routes/simple");
 const advanceRoute = require("./routes/advance");
 
-const PORT = process.env.PORT | 8080;
+const PORT = process.env.PORT | 8000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
