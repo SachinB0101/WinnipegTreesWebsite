@@ -42,3 +42,7 @@ p{
 	font-size: 12px;
   color: #735F32;
 }
+
+th {
+	font-size: 1.5vw;
+}

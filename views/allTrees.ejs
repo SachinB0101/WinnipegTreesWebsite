@@ -1,8 +1,17 @@
 <%- include("partials/header"); -%>
-<h1>Hello World</h1>
 
-<%for(let i = 0; i < result.recordset.length; i++){%>
-    <p><%="Botanical Name = " + result.recordset[i].botanical + " Common Name = " + result.recordset[i].common%><p>
-<%}%>
+<table>
+    <tr>
+        <th>Botanical Name</th>
+        <th>Common Name</th>
+    </tr>
+    <%for(let i = 0; i < result.recordset.length; i++){%>
+        <tr>
+            <td><%=result.recordset[i].botanical%></td>
+            <td><%=result.recordset[i].common%></td>
+        </tr>
+    <%}%>
+</table>
+
 
 <%- include("partials/footer"); -%>
